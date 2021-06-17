@@ -30,7 +30,9 @@ public class StringRenderer {
             {
                 sb.append(map[raw][col]);
             }
-            sb.append('\n');
+            if (raw < height - 1 ) {
+                sb.append(String.format("%n"));
+            }
         }
         return sb.toString();
     }
