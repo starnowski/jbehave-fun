@@ -8,29 +8,24 @@ public class StringRenderer {
     private int width;
     private int height;
 
-    private List<Cordinates> cordinates = new ArrayList<Cordinates>();
+    private List<Cordinates> crosses = new ArrayList<Cordinates>();
 
     public String asString() {
         char[][] map = new char[height][width];
-        for (int raw = 0; raw < height; raw++)
-        {
-            for (int col = 0; col < width; col++)
-            {
+        for (int raw = 0; raw < height; raw++) {
+            for (int col = 0; col < width; col++) {
                 map[raw][col] = '.';
             }
         }
-        for (Cordinates cor: cordinates)
-        {
+        for (Cordinates cor : crosses) {
             map[cor.getY()][cor.getX()] = 'X';
         }
         StringBuilder sb = new StringBuilder();
-        for (int raw = 0; raw < height; raw++)
-        {
-            for (int col = 0; col < width; col++)
-            {
+        for (int raw = 0; raw < height; raw++) {
+            for (int col = 0; col < width; col++) {
                 sb.append(map[raw][col]);
             }
-            if (raw < height - 1 ) {
+            if (raw < height - 1) {
                 sb.append(String.format("%n"));
             }
         }
@@ -43,6 +38,9 @@ public class StringRenderer {
     }
 
     public void toggleCellAt(int column, int row) {
-        cordinates.add(new Cordinates(column, row));
+        Cordinates cor = new Cordinates(column, row);
+        if (!crosses.remove(cor)) {
+            crosses.add(cor);
+        }
     }
 }
