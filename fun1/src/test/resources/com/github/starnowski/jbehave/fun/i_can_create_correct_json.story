@@ -1,6 +1,5 @@
 Given empty json freemarker template
 When generate json based on template and model
-!-- TODO check how to create json in freemarker without new line
 Then the json should look like
 {}
 Given empty json freemarker template
