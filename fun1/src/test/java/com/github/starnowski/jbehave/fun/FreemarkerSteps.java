@@ -11,8 +11,10 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.junit.Assert;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,12 +25,14 @@ public class FreemarkerSteps { // Look, Ma', I'm a POJO!
     private Configuration configuration;
 
     @Given("empty json freemarker template")
-    public void givenEmptyJsonFreemarkerTemplate(int width, int height) {
+//    @Aliases(values={"empty json freemarker template"})
+    public void givenEmptyJsonFreemarkerTemplate() throws IOException, URISyntaxException {
         configuration = prepareConfiguration();
         model = new HashMap();
     }
 
     @When("generate json based on template and model")
+//    @Aliases(values={"generate json based on template and model"})
     public void whenGenerateJsonBasedOnTemplate() throws IOException, TemplateException {
         Template template = configuration.getTemplate("jsonTemplate.ftl");
         // write the freemarker output to a StringWriter
@@ -45,6 +49,7 @@ public class FreemarkerSteps { // Look, Ma', I'm a POJO!
     }
 
     @Then("the json should look like $expectedJson")
+//    @Aliases(values={"the json should look like $expectedJson"})
     public void theJsonShouldLookLike(String expectedJson) {
         Assert.assertThat(json, IsEqual.equalTo(expectedJson));
     }
@@ -55,11 +60,14 @@ public class FreemarkerSteps { // Look, Ma', I'm a POJO!
         return data;
     }
 
-    private Configuration prepareConfiguration() {
+    private Configuration prepareConfiguration() throws IOException, URISyntaxException {
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_23);
         configuration.setDefaultEncoding("UTF-8");
         configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         configuration.setLogTemplateExceptions(false);
+//        FileTemplateLoader ftl1 = new FileTemplateLoader(new File("src/test/templates"));
+//        FileTemplateLoader ftl1 = new FileTemplateLoader(new File(FreemarkerSteps.class.getClassLoader().getResource("templates").toURI()));
+        configuration.setDirectoryForTemplateLoading(new File(FreemarkerSteps.class.getClassLoader().getResource("templates").toURI()));
         return configuration;
     }
 
