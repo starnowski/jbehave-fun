@@ -24,7 +24,7 @@ And json contains composite object with text property with value xxx
 When generate json based on template and model
 Then the json should look like
 {
-"surname": "Doe",
+"name": "John",
 "inner": {
 "text": "xxx"
 }

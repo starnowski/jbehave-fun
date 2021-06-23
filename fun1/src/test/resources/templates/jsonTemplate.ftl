@@ -3,7 +3,7 @@
     <#if prop=='inner'>
         "inner": {
             <#list jsonParameters['inner']?keys as innerKey>
-            "inner": "${jsonParameters['inner'][innerKey]}"
+            "${innerKey}": "${jsonParameters['inner'][innerKey]}"
             </#list>
         }<#if prop?has_next>,</#if>
     <#else>

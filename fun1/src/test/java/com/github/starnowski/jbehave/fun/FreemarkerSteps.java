@@ -48,6 +48,13 @@ public class FreemarkerSteps { // Look, Ma', I'm a POJO!
         model.put(propertyName, propertyValue);
     }
 
+    @Given(value = "json contains composite object with $propertyName property with value $propertyValue", priority = 1)
+    @Alias("And json contains composite object with $propertyName property with value $propertyValue")
+    public void andInnerObjects(String propertyName, String propertyValue) {
+        Map innerParameters = (Map) model.computeIfAbsent("inner", (key) -> new HashMap<>());
+        innerParameters.put(propertyName, propertyValue);
+    }
+
     @Then("the json should look like $expectedJson")
 //    @Aliases(values={"the json should look like $expectedJson"})
     public void theJsonShouldLookLike(String expectedJson) {
