@@ -1,5 +1,3 @@
-{
-<#list jsonParameters?keys as prop>
+{<#list jsonParameters?keys as prop>
     "${prop}": "${jsonParameters[prop]}"
-</#list>
-}
+</#list>}
