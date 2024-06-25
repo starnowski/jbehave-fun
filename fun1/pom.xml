@@ -78,8 +78,6 @@
                                         <value>true</value>
                                     </property>
                                 </systemProperties>
-
-
                             </configuration>
                             <goals>
                                 <goal>run-stories-as-embeddables</goal>
